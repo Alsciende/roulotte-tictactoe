@@ -1,10 +1,13 @@
-test: phpstan phpunit
+test: phpstan schema phpunit
 
 phpstan: vendor/bin/phpstan
 	php vendor/bin/phpstan analyze src/ --level=max
 
 vendor/bin/phpstan:
 	composer install
+
+schema:
+	bin/console doctrine:schema:validate
 
 phpunit: vendor/bin/phpunit
 	php vendor/bin/phpunit

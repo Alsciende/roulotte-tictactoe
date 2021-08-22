@@ -2,16 +2,16 @@
 
 namespace App\MessageHandler;
 
-use App\Document\Game;
+use App\Entity\Game;
 use App\Message\CreateGameMessage;
-use Doctrine\ODM\MongoDB\DocumentManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 class CreateGameMessageHandler implements MessageHandlerInterface
 {
-    private DocumentManager $manager;
+    private EntityManagerInterface $manager;
 
-    public function __construct(DocumentManager $manager)
+    public function __construct(EntityManagerInterface $manager)
     {
         $this->manager = $manager;
     }

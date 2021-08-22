@@ -1,31 +1,33 @@
 <?php
 
-namespace App\Document;
+namespace App\Entity;
 
-use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Uid\Uuid;
 
 /**
- * @MongoDB\Document(collection="games")
+ * @ORM\Entity
  */
 class Game
 {
     /**
-     * @MongoDB\Id
+     * @ORM\Id()
+     * @ORM\Column(type="uuid")
      */
     private string $id;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @ORM\Column(type="string", length=50)
      */
     private string $name;
 
     /**
-     * @MongoDB\Field(type="int")
+     * @ORM\Column(type="integer")
      */
     private int $minPlayers;
 
     /**
-     * @MongoDB\Field(type="int")
+     * @ORM\Column(type="integer")
      */
     private int $maxPlayers;
 
@@ -36,6 +38,7 @@ class Game
      */
     public function __construct(string $name, int $minPlayers, int $maxPlayers)
     {
+        $this->id = Uuid::v4();
         $this->name = $name;
         $this->minPlayers = $minPlayers;
         $this->maxPlayers = $maxPlayers;

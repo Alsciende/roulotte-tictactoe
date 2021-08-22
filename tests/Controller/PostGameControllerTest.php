@@ -10,7 +10,7 @@ class PostGameControllerTest extends ApiTestCase
     {
         $data = ['name' => 'New Game', 'minPlayers' => 2, 'maxPlayers' => 2];
         $response = self::sendRequest('POST', '/games', $data, 200);
-        $this->assertArrayHasKey('id', $response);
+        $this->assertNotEmpty($response['id']);
     }
 
     public function testName(): void
