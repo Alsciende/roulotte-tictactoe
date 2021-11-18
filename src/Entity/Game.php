@@ -14,7 +14,7 @@ class Game
      * @ORM\Id()
      * @ORM\Column(type="uuid")
      */
-    private string $id;
+    private Uuid $id;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -46,7 +46,7 @@ class Game
 
     public function getId(): string
     {
-        return $this->id;
+        return $this->id->toBase58();
     }
 
     public function getName(): string

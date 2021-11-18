@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Players;
 
-use App\Message\CreateGameMessage;
-use App\Tests\Controller\AbstractApiController;
+use App\Controller\AbstractApiController;
+use App\Message\CreatePlayerMessage;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 use Symfony\Component\Routing\Annotation\Route;
 
-class PostGameController extends AbstractApiController
+class PostPlayerController extends AbstractApiController
 {
-    #[Route('/games', name: 'post_game', methods: ['POST'], format: 'json')]
-    public function __invoke(CreateGameMessage $message): Response
+    #[Route('/players', name: 'post_player', methods: ['POST'], format: 'json')]
+    public function __invoke(CreatePlayerMessage $message): Response
     {
         $envelope = $this->bus->dispatch($message);
         /** @var HandledStamp $handledStamp */
