@@ -4,6 +4,7 @@ namespace App\ParamConverter;
 
 use App\Exception\ValidationHttpException;
 use App\Message\MessageInterface;
+use App\RequestData\RequestDataInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,12 +28,16 @@ class RequestDataParamConverter implements ParamConverterInterface
         /** @var string $name */
         $name = $configuration->getName();
 
-        /** @var string|MessageInterface $messageClass */
+        /** @var MessageInterface $messageClass */
         $messageClass = $configuration->getClass();
 
         $dataClass = $messageClass::getDataClass();
 
         $dataObject = $this->serializer->deserialize($request->getContent(), $dataClass, 'json');
+
+        if (false === $dataObject instanceof RequestDataInterface) {
+            throw new InvalidDataClassException($dataClass, $configuration->getClass());
+        }
 
         $errors = $this->validator->validate($dataObject);
 

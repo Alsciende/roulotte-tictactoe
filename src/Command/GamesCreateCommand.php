@@ -31,7 +31,7 @@ class GamesCreateCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addArgument('name', InputArgument::OPTIONAL, 'Name of the game', 'new_game')
+            ->addArgument('name', InputArgument::REQUIRED, 'Name of the game', 'new_game')
             ->addOption('min', null, InputOption::VALUE_REQUIRED, 'Min number of players', 0)
             ->addOption('max', null, InputOption::VALUE_REQUIRED, 'Max number of players', 10)
         ;
@@ -41,11 +41,23 @@ class GamesCreateCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $message = new CreateGameMessage(
-            $input->getArgument('name'),
-            $input->getOption('min'),
-            $input->getOption('max')
-        );
+        $name = $input->getArgument('name');
+        if (false === is_string($name)) {
+            throw new \UnexpectedValueException("Expected string for argument 'name', got " . gettype($name));
+        }
+
+
+        $min = $input->getOption('min');
+        if (false === is_int($min)) {
+            throw new \UnexpectedValueException("Expected int for option 'min', got " . gettype($name));
+        }
+
+        $max = $input->getOption('max');
+        if (false === is_int($max)) {
+            throw new \UnexpectedValueException("Expected int for option 'max', got " . gettype($name));
+        }
+
+        $message = new CreateGameMessage($name, $min, $max);
 
         /** @var HandledStamp $stamp */
         $stamp = $this->bus->dispatch($message)->last(HandledStamp::class);

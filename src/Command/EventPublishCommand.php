@@ -40,7 +40,7 @@ class EventPublishCommand extends Command
 
         $update = new Update(
             'http://example.com/books/1',
-            json_encode(['hello' => 'world'])
+            (string) json_encode(['hello' => 'world'])
         );
 
         $this->hub->publish($update);

@@ -14,6 +14,7 @@ class CreateGameMessage implements MessageInterface
     public static function fromData(RequestDataInterface $data): self
     {
         if ($data instanceof CreateGameRequestData) {
+            // @phpstan-ignore-next-line let it crash if $data is not properly validated
             return new self($data->name, $data->minPlayers, $data->maxPlayers);
         }
 

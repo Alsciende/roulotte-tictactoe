@@ -7,6 +7,7 @@ use Symfony\Component\Uid\Uuid;
 
 /**
  * @ORM\Entity
+ * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="player_name_idx", fields={"name", "game"})})
  */
 class Player
 {
