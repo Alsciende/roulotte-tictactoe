@@ -23,7 +23,7 @@ class RequestDataParamConverter implements ParamConverterInterface
         $this->validator = $validator;
     }
 
-    public function apply(Request $request, ParamConverter $configuration)
+    public function apply(Request $request, ParamConverter $configuration): bool
     {
         /** @var string $name */
         $name = $configuration->getName();
@@ -52,7 +52,7 @@ class RequestDataParamConverter implements ParamConverterInterface
         return true;
     }
 
-    public function supports(ParamConverter $configuration)
+    public function supports(ParamConverter $configuration): bool
     {
         $class = $configuration->getClass();
         if (false === is_a($class, MessageInterface::class, true)) {

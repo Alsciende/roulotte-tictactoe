@@ -18,7 +18,7 @@ class ValidationHttpExceptionListener implements EventSubscriberInterface
         $this->serializer = $serializer;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return array(
             KernelEvents::EXCEPTION => [ 'onKernelException', 0 ]
