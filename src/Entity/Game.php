@@ -22,14 +22,19 @@ class Game
     private string $name;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="smallint")
      */
     private int $minPlayers;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="smallint")
      */
     private int $maxPlayers;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private int $createdAt;
 
     /**
      * @param string $name
@@ -42,6 +47,7 @@ class Game
         $this->name = $name;
         $this->minPlayers = $minPlayers;
         $this->maxPlayers = $maxPlayers;
+        $this->createdAt = time();
     }
 
     public function getId(): string
@@ -62,5 +68,10 @@ class Game
     public function getMaxPlayers(): int
     {
         return $this->maxPlayers;
+    }
+
+    public function getCreatedAt(): int
+    {
+        return $this->createdAt;
     }
 }

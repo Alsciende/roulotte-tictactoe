@@ -15,3 +15,6 @@ phpunit: vendor/bin/phpunit
 vendor/bin/phpunit:
 	composer install
 
+clean:
+	bin/console d:s:d --force
+	bin/console d:s:c
