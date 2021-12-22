@@ -11,3 +11,5 @@ framework:
 
         routing:
             # Route your messages to the transports
+
+        reset_on_message: true

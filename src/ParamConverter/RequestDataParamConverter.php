@@ -11,6 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+/**
+ * Convert the request body to a MessageInterface controller parameter
+ * @see \App\Message\MessageInterface
+ */
 class RequestDataParamConverter implements ParamConverterInterface
 {
     private SerializerInterface $serializer;

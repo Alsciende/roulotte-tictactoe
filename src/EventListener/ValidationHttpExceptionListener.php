@@ -9,6 +9,10 @@ use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Serializer\SerializerInterface;
 
+/**
+ * Generate a JSON response when a ValidationHttpException is thrown
+ * @see \App\ParamConverter\RequestDataParamConverter
+ */
 class ValidationHttpExceptionListener implements EventSubscriberInterface
 {
     private SerializerInterface $serializer;
@@ -34,7 +38,7 @@ class ValidationHttpExceptionListener implements EventSubscriberInterface
         }
 
         $content = $this->serializer->serialize($exception->getErrors(), 'json');
-        $response = new Response($content, 400);
+        $response = new Response($content, Response::HTTP_BAD_REQUEST);
 
         $event->setResponse($response);
     }

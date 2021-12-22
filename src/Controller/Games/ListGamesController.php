@@ -4,7 +4,6 @@ namespace App\Controller\Games;
 
 use App\Controller\AbstractApiController;
 use App\Repository\GameRepository;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 

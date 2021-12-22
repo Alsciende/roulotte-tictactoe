@@ -24,7 +24,7 @@ class ApiTestCase extends WebTestCase
         self::$bus = $bus;
     }
 
-    public static function sendRequest(string $method, string $uri, array $parameters, int $expectedCode): array
+    public static function sendRequest(string $method, string $uri, array $parameters = [], int $expectedCode = 200): array
     {
         self::$client->jsonRequest($method, $uri, $parameters);
         self::assertResponseStatusCodeSame($expectedCode);

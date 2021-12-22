@@ -8,6 +8,9 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
+/**
+ * Inject useful services in all API controllers
+ */
 abstract class AbstractApiController extends AbstractController
 {
     protected SerializerInterface $serializer;

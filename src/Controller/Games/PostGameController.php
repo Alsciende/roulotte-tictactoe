@@ -16,6 +16,6 @@ class PostGameController extends AbstractApiController
         $envelope = $this->bus->dispatch($message);
         /** @var HandledStamp $handledStamp */
         $handledStamp = $envelope->last(HandledStamp::class);
-        return $this->json($handledStamp->getResult());
+        return $this->json($handledStamp->getResult(), Response::HTTP_CREATED);
     }
 }

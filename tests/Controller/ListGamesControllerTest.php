@@ -7,7 +7,7 @@ use App\Message\CreateGameMessage;
 use App\Tests\ApiTestCase;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 
-class PostPlayerControllerTest extends ApiTestCase
+class ListGamesControllerTest extends ApiTestCase
 {
     public function testSuccess(): void
     {
@@ -15,8 +15,12 @@ class PostPlayerControllerTest extends ApiTestCase
         /** @var Game $game */
         $game = $envelope->last(HandledStamp::class)->getResult();
 
-        $data = ['name' => 'Alsciende', 'gameId' => $game->getId()];
-        $response = self::sendRequest('POST', '/players', $data, 201);
-        $this->assertNotEmpty($response['id']);
+        $response = self::sendRequest('GET', '/games');
+        $this->assertIsArray($response);
+        $this->assertNotEmpty($response);
+        $game = $response[0];
+        $this->assertIsArray($game);
+        $this->assertNotEmpty($game['id']);
+        $this->assertNotEmpty($game['createdAt']);
     }
 }
